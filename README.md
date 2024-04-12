@@ -1,22 +1,27 @@
 # get-aws-instances-grouped-by-ami
 
-Gets a list of AMIs being used by your instances on a selected regions, displaying a list of the instances using each AMI
+Gets a list of AMIs being used by your instances on a selected region, displaying a list of AMIs and the instances using them.
 
 ## Requirements
 Powershell 7.x - [Installing Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.4) <br> 
 AWS CLI - [AWS Command Line Interface](https://aws.amazon.com/cli/) 
 
 ## Usage
+### Directly
 `./GetAMIUsageForCurrentAccount.ps1 -Region us-west-1`
 
-To run using Docker see [Running using Docker]()
+### Using Docker
+Powershell:<br>
+`./RunWithDocker.ps1 -Region us-west-1`
+
+Shell<br>
+`./RunWithDocker.sh -Region us-west-1`
 
 ### Parameters
-`-Region` Region in where to search <br>
+`-Region` AWS Region <br>
 `-Verbose` Enable Verbose output 
 
 ## Sample Output
-
 ```
 {
   "ami-09b9e43233476eb5a8e": {
@@ -61,4 +66,16 @@ Count Name
     2 ami-0da38e6f9084a0b
 VERBOSE: [DescribeAMIsByIdInCurrentAccount] Calling 'aws ec2 describe-images' with 56 Image Ids - Region ca-central-1
 VERBOSE: [DescribeAMIsByIdInCurrentAccount] Total Images: 3
+{
+  "ami-09b9e43233476eb5a8e": {
+    "ImageName": "null",
+    "ImageDescription": "null",
+    "ImageLocation": "738814430855/MY-CUSTOM-WINDOWS-AMI",
+    "OwnerId": "738813630844",
+    "InstanceIds": [
+      "i-0c00e8uc0a5765baf"
+    ]
+  }, 
+  [...]
+}
 ``` 
