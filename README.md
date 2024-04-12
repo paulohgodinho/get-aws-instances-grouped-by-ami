@@ -78,4 +78,31 @@ VERBOSE: [DescribeAMIsByIdInCurrentAccount] Total Images: 3
   }, 
   [...]
 }
-``` 
+```
+
+## Design Decisions
+### AWS Tools for Powershell
+I did not use the AWS Tools for Powershell to avoid adding another dependency and to keep the AWS CLI calls grounded to what people see on a day-to-day basis in Shell and the official documentation. This way, the user experience of someone looking at the script may seem more familiar even if they are not versed in Powershell.
+
+### Breaking into multiple scripts
+It is clear to me that logic related to querying machines and AMIs can be used elsewhere in the future, this is why I made the decision to split this "simple" script into multiple others. Of course, it also adds to the readability and overall tidiness of the project.
+
+## Commentary on Output Schema
+I would suggest changing the output schema to mimic the AWS CLI outputs. The current output has ONE object with N other objects inside, this is a characteristic of an Array, this is why I would change this outer parent object to one. This could help in parsing and iterating over the elements of the JSON.
+
+From
+```
+{
+    { },
+    { },
+    [...]
+}
+```
+To
+```
+[
+    { },
+    { },
+    [...]
+]
+```
