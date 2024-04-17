@@ -7,4 +7,4 @@ if [ $? != 0 ]; then
 fi
 
 echo $@
-docker run -v "$(pwd)":/files $image_name_tag $@
+docker run -v "$(pwd)":/files -v "$(home)/.aws":/root/.aws $image_name_tag $@
