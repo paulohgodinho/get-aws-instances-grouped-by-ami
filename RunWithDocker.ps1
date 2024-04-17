@@ -7,6 +7,6 @@ if($LASTEXITCODE -ne 0) {
     docker build . -t $image_name_tag
 }
 
-$volumeMap = "${PWD}:/files"
-$volumeMap
-docker run -v $volumeMap $image_name_tag $args
+$filesVolumeMap = "${PWD}:/files"
+$homeVolumeMap = "${HOME}/.aws:/root/.aws"
+docker run -v $filesVolumeMap -v $homeVolumeMap $image_name_tag $args
