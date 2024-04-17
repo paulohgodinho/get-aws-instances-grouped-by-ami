@@ -6,4 +6,5 @@ if [ $? != 0 ]; then
     docker build . -t ${image_name_tag}
 fi
 
-docker run -v "$(pwd)":/testfolder -v "$(home)/.aws":/root/.aws $image_name_tag
+echo $@
+docker run -v "$(pwd)":/files $image_name_tag $@

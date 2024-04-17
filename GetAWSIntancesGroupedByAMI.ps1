@@ -43,7 +43,8 @@ foreach ($amiId in $amisBeingUsed)
     $amiDetails.OwnerId = $ami.OwnerId
     $amiDetails.ImageLocation = $ami.ImageLocation
     $amiDetails.ImageName = $ami.ImageName
-    $amiDetails.InstanceIds = $instances | Where-Object -Property ImageId -EQ -Value $ami.ImageId | Select-Object -ExpandProperty InstanceId
+    $amiDetails.InstanceIds = $instances | Where-Object -Property ImageId -EQ -Value $amiId | Select-Object -ExpandProperty InstanceId
+
 
     # Enforcing 'null' rule for empty strings
     foreach($member in $amiDetails.PSObject.Properties) {
